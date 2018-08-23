@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.apache.tomcat.jni.Poll;
-
 @Entity
 @Table(name = "choices")
 public class Choice {
@@ -33,6 +31,11 @@ public class Choice {
     public Choice() {
     	
     }
+    
+	public Choice(@NotBlank @Size(max = 40) String text) {
+		super();
+		this.text = text;
+	}
 
 	public Long getId() {
 		return id;

@@ -13,7 +13,7 @@ import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "roles")
-public class Roll {
+public class Role {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,11 +23,11 @@ public class Roll {
     @Column(length = 60)
     private RollName name;
 
-    public Roll() {
+    public Role() {
     	
     }
 
-    public Roll(RollName name) {
+    public Role(RollName name) {
         this.name = name;
     }
 

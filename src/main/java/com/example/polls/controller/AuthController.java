@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.polls.exception.AppException;
-import com.example.polls.model.Roll;
+import com.example.polls.model.Role;
 import com.example.polls.model.RollName;
 import com.example.polls.model.User;
 import com.example.polls.payload.ApiResponse;
 import com.example.polls.payload.JwtAuthenticationResponse;
 import com.example.polls.payload.LoginRequest;
 import com.example.polls.payload.SignUpRequest;
-import com.example.polls.repository.RollRepository;
+import com.example.polls.repository.RoleRepository;
 import com.example.polls.repository.UserRepository;
 import com.example.polls.security.JwtTokenProvider;
 
@@ -42,7 +42,7 @@ public class AuthController {
 	UserRepository userRepository;
 	
 	@Autowired
-	RollRepository roleRepository;
+	RoleRepository roleRepository;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -83,7 +83,7 @@ public class AuthController {
 		
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
-		Roll userRole = roleRepository.findByName(RollName.ROLE_USER)
+		Role userRole = roleRepository.findByName(RollName.ROLE_USER)
 				.orElseThrow(() -> new AppException("User ROle not set"));
 		
 		user.setRoles(Collections.singleton(userRole));

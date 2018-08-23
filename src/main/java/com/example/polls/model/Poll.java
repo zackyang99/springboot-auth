@@ -1,5 +1,6 @@
 package com.example.polls.model;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.BatchSize;
@@ -42,6 +44,17 @@ public class Poll extends UserDateAudit {
     @Fetch(FetchMode.SELECT)
     @BatchSize(size = 30)
     private List<Choice> choices = new ArrayList<>();
+    
+    @NotNull
+    private Instant expirationDateTime;
+
+	public Instant getExpirationDateTime() {
+		return expirationDateTime;
+	}
+
+	public void setExpirationDateTime(Instant expirationDateTime) {
+		this.expirationDateTime = expirationDateTime;
+	}
 
 	public Long getId() {
 		return id;
@@ -65,5 +78,9 @@ public class Poll extends UserDateAudit {
 
 	public void setChoices(List<Choice> choices) {
 		this.choices = choices;
+	}
+	
+	public void addChoice(Choice choice) {
+		this.getChoices().add(choice);
 	}
 }
